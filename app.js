@@ -1,15 +1,19 @@
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
+const session = require('express-session');
+const passport= require('passport');
+const LocalStrategy = require('passport-local').Strategy;
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 let mongoose = require('mongoose');
+let bcrypt = require('bcryptjs')
 require('dotenv').config()
 let mongoDB = process.env.DB_URL
 mongoose.connect(mongoDB, {useNewUrlParser:true, useUnifiedTopology:true});
 let db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'))
-
+let User = require('./models/user')
 var indexRouter = require('./routes/index');
 
 var app = express();
@@ -18,18 +22,65 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
+
+passport.use(
+  new LocalStrategy({usernameField:'username', passwordField:'password'},
+  (username, password, done) => {
+    User.findOne({ email: username }, (err, user) => {
+      if (err) { 
+        return done(err);
+      }
+      if (!user) {
+        return done(null, false, { message: "Incorrect username" });
+      }
+      console.log('User:', user)
+      bcrypt.compare(password, user.password, (err, res) => {
+        if (res) {
+          // passwords match! log user in
+          console.log('success')
+          return done(null, user)
+        } else {
+          // passwords do not match!
+          return done(null, false, { message: "Incorrect password" })
+        }
+      })
+    });
+  })
+);
+
+
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+})
+
+passport.deserializeUser(function(id, done) {
+  User.findById(id, function(err, user) {
+    done(err, user)
+  })
+})
+
+
+app.use(session({secret:'cats', resave:false, saveUninitialized:true}));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(express.urlencoded({extended:false}))
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(function(req, res, next) {
+  res.locals.currentUser = req.user;
+  next()
+})
 
 app.use('/', indexRouter);
-
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
 });
+
 
 // error handler
 app.use(function(err, req, res, next) {
