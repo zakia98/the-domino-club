@@ -12,10 +12,10 @@
     "express": "~4.16.1",
     "express-session": "^1.17.2",
     "http-errors": "~1.6.3",
-    "jade": "~1.11.0",
     "mongoose": "^6.3.2",
     "morgan": "~1.9.1",
     "passport": "^0.5.2",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "pug": "^3.0.2"
   }
 }
