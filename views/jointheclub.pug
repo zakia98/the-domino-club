@@ -1,0 +1,15 @@
+extends layout 
+
+block content 
+
+    h1= title
+    if error 
+        h2 #{error}
+
+    if user 
+        h3 Current User: #{user.email}
+    h2 Answer this question to become a member:
+    form.secretphrase(action='' method='POST')
+        p  What cocktail is best shaken, not stirred?
+        input(type="text" name='answer' placeholder='Please input the answer')
+        button(type='submit') Submit
