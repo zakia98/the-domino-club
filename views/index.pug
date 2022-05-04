@@ -3,4 +3,15 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
-  a(href="/signup") signup
+  if user
+      h3 Current User: #{user.email}
+      a(href="/signout") Sign out
+
+  else
+    form.login(action='/login' method='POST')
+      label(for="email") Email: 
+        input(type="email" name='username' placeholder='enter email')
+      label(for='password') Password: 
+        input(type='password' name='password' placeholder='password') 
+      button(type='submit') Login 
+      a(href="/signup") Signup
