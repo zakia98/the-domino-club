@@ -1,0 +1,26 @@
+extends layout 
+
+block content 
+
+    if errors 
+        ul 
+            for error in errors 
+                li!= error.msg
+
+    form.signup-form(method='POST' action='')
+        div.formitem 
+            label(for="first_name") First name: 
+            input(type="text" name='first_name' placeholder='Please enter first name' value=(user===undefined ? '' : user.first_name)) 
+        div.formitem 
+            label(for="last_name") Last name: 
+            input(type="text" name='last_name' placeholder='Please enter last name' value=(user === undefined ? '' : user.last_name))
+        div.formitem 
+            label(for="email") Email Address:
+            input(type="email" name='email' placeholder='Please enter your email address' value=(user === undefined ? '' : user.email))
+        div.formitem 
+            label(for="password") Password: (1 capital letter, 1 number)
+            input(type="password" name='password' placeholder='Please enter password')
+        div.formitem 
+            label(for="confirm") Confirm Password: (1 capital letter, 1 number)
+            input(type="password" name='passwordConfirmation' placeholder='Please confirm password')
+        button(type='submit') Create Account 
