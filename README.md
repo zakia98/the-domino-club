@@ -7,10 +7,10 @@
 
 [Live Demo](https://domino-club.herokuapp.com/)
 
-![Demo image1](https://github.com/zakia98/the-domino-club/blob/main/screenshots/screenshot1)
-![Demo image2](https://github.com/zakia98/the-domino-club/blob/main/screenshots/screenshot2)
-![Demo image3](https://github.com/zakia98/the-domino-club/blob/main/screenshots/screenshot3)
-![Demo image4](https://github.com/zakia98/the-domino-club/blob/main/screenshots/screenshot4)
+![Demo image1](screenshots/screenshot1)
+![Demo image2](screenshots/screenshot2)
+![Demo image3](screenshots/screenshot3)
+![Demo image4](screenshots/screenshot4)
 
 
 
