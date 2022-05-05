@@ -7,7 +7,7 @@
 
 [Live Demo](https://domino-club.herokuapp.com/)
 
-![Demo image1](./screenshots/screenshot1)
+![Demo image1](./screenshots/screenshot1.png)
 ![Demo image2](./screenshots/screenshot2)
 ![Demo image3](./screenshots/screenshot3)
 ![Demo image4](./screenshots/screenshot4)
