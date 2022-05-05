@@ -10,4 +10,11 @@ let UserSchema = new Schema({
     isAdmin:{type:Boolean, required:false},
 })
 
+UserSchema
+    .virtual('full_name')
+    .get(function() {
+        let fullname = this.first_name + ' ' + this.last_name
+        return fullname
+    }) 
+
 module.exports = mongoose.model('User', UserSchema)
