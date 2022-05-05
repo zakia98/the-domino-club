@@ -19,9 +19,10 @@
 - Pug
 - PassportJS
 - MongoDB
+- express-validator
 
 ## Reflections
 
 The main goal of the project was to employ the use of security and authentication. Using passportJS, I was able to employ a system which allowed users to sign up, and have their login details displayed across the app. 
 
-
+Additionally, the project makes use of the express validator library to create custom validation and sanitization of user input for text message and signup forms. 
