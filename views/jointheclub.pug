@@ -1,10 +1,13 @@
 extends layout 
 
 block content 
+    header
+        a(href='/') < Back
+        h1= title
+        img.logo(src="../images/dominos.svg", alt="logo", href='/')
 
-    h1= title
     if error 
-        h2 #{error}
+        h2.error #{error}
 
     if user 
         h3 Current User: #{user.email}

@@ -1,11 +1,14 @@
 extends layout 
 
 block content 
-    h1= title
+    header
+        a(href="/") < Back  
+        img.logo(src="../images/dominos.svg", alt="logo", href="/")
+        h1= title
     if errors 
-        ul 
+        ul.errors 
             for error in errors 
-                li!= error.msg
+                li.error!= error.msg
 
     form.signup-form(method='POST' action='')
         div.formitem 
@@ -18,9 +21,9 @@ block content
             label(for="email") Email Address:
             input(type="email" name='email' placeholder='Please enter your email address' value=(user === undefined ? '' : user.email))
         div.formitem 
-            label(for="password") Password: (1 capital letter, 1 number)
+            label(for="password") Password: 
             input(type="password" name='password' placeholder='Please enter password')
         div.formitem 
-            label(for="confirm") Confirm Password: (1 capital letter, 1 number)
+            label(for="confirm") Confirm Password: 
             input(type="password" name='passwordConfirmation' placeholder='Please confirm password')
-        button(type='submit') Create Account 
+        button.button(type='submit') Create Account 

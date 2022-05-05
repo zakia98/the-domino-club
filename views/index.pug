@@ -1,17 +1,59 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
-  if user
-      h3 Current User: #{user.email}
-      a(href="/signout") Sign out
+  header
+    img.logo(src="../images/dominos.svg", alt="logo", srcset="")
+    h1 The Domino Club
+    if user
+        h3 Current User: #{user.email}
+        a(href="/signout") Sign out
+        if (!user.member_status)
+          a(href='/jointheclub') Join the club
+    else 
+      form.login(action='/login' method='POST')
+        label(for="email") Email: 
+          input(type="email" name='username' placeholder='enter email')
+        label(for='password') Password: 
+          input(type='password' name='password' placeholder='password') 
+        div.formbuttons
+          a(type='button' href="/signup") Signup
+          button.button(type='submit') Login 
 
+  h2.welcomemessage Welcome to The Domino Club
+  if user
+    div.newmessage.container
+      if newMessageErrors 
+        ul.errors 
+          for error in newMessageErrors 
+            li.error!= error.msg
+      form(action="new-message", method="post").newmessage
+        label(for='title')#title Title:
+        input(type="text" name='title' value=(title === undefined ? '' : title)) 
+        label(for='message') Message: 
+        textarea(name="messageContent", cols="30", rows="10" value=(messageContent === undefined ? '' : messageContent))
+        button.button(type='submit') Submit 
   else
-    form.login(action='/login' method='POST')
-      label(for="email") Email: 
-        input(type="email" name='username' placeholder='enter email')
-      label(for='password') Password: 
-        input(type='password' name='password' placeholder='password') 
-      button(type='submit') Login 
-      a(href="/signup") Signup
+    div.newmessage 
+      p#signinmessage Sign in to send messages!
+
+
+  for message in message_list 
+    div.message
+      - console.log(user) 
+      div.maincontent
+        h3.title #{message.decoded_title}
+        p.messagetext #{(message.decoded_message)}
+      div.info
+        if user
+          if user.member_status 
+            p.sender #{message.user}
+        else 
+          p.sender You need to log in and be a
+            a(href='/jointheclub')  member  
+            | to see who posted!
+        p.timestamp #{message.timestamp.toString().slice(0, 21)}
+      if user 
+        if user.isAdmin 
+          form(method="POST" action=`/delete-message/${message._id}`) 
+            input#messageid(type='hidden' name='messageid', require='true' value=message._id)
+            button.button(type='submit') Delete
