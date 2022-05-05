@@ -9,18 +9,23 @@ var logger = require('morgan');
 let mongoose = require('mongoose');
 let bcrypt = require('bcryptjs')
 require('dotenv').config()
+global.decode = require('./helpers').decode
 let mongoDB = process.env.DB_URL
 mongoose.connect(mongoDB, {useNewUrlParser:true, useUnifiedTopology:true});
 let db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'))
 let User = require('./models/user')
 var indexRouter = require('./routes/index');
-
 var app = express();
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'pug');
+app.set('views', path.join(__dirname, 'views'), {
+  extension: 'pug',
+  options: {
+    globals:['decode']
+  }
+});
+app.set('view engine', 'pug', {});
 
 
 passport.use(
@@ -33,7 +38,6 @@ passport.use(
       if (!user) {
         return done(null, false, { message: "Incorrect username" });
       }
-      console.log('User:', user)
       bcrypt.compare(password, user.password, (err, res) => {
         if (res) {
           // passwords match! log user in
