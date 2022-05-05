@@ -1,14 +1,15 @@
 var express = require('express');
-const { route } = require('../app');
 var router = express.Router();
 let indexController = require('../controllers/indexController')
-const passport = require('passport')
-const LocalStrategy = require('passport-local').Strategy;
 const authController = require('../controllers/authController')
+const helper = require('../helpers')
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'The Domino Club', user:res.locals.currentUser });
+  const messages = helper.getAllMessages()
+  messages.then(message_list => {
+    res.render('index', {user:res.locals.currentUser, message_list:message_list})
+  })
 });
 
 router.get('/signup', function(req, res, next) {
@@ -25,9 +26,13 @@ router.post('/jointheclub', indexController.jointheclub_post)
 
 router.post('/login', authController.login_post)
 
-router.get("/signout", (req, res) => {
+router.get("/signout", (req, res, next) => {
   req.logout();
   res.redirect("/");
 });
+
+router.post('/new-message', indexController.new_message_post)
+
+router.post('/delete-message/:id', indexController.message_delete)
 
 module.exports = router;
