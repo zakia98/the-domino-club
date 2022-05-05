@@ -1,8 +1,148 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap');
+
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color:rgb(218, 216, 216);
+  margin:0;
+  padding:0;
+  display:flex;
+  flex-direction:column;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Quicksand', sans-serif;
 }
 
 a {
-  color: #00B7FF;
+  color: #b4ebff;
+}
+
+.newmessage {
+  display:flex;
+  flex-direction: column;
+}
+
+header {
+  background-color: rgb(43, 43, 43);
+  display:flex;
+  width:100%;
+  flex-direction:row;
+  align-items: center;
+  padding:5px;
+  gap:5px;
+  justify-content: space-around;
+  color:white
+}
+
+.logo {
+  width:50px;
+  height:50px;
+}
+
+.login {
+  display:flex;
+  flex-direction: column;
+  justify-content: end;
+}
+
+.login > label {
+  display:flex;
+  gap:5px;
+  justify-content: end;
+  align-items: center;
+}
+
+.button {
+  background-color: aliceblue;
+  color:black;
+  font-size:18px;
+  border-radius: 5px;
+  border:2px solid black;
+  max-width:80px;
+}
+
+.formbuttons {
+  display:flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap:5px;
+}
+
+.welcomemessage {
+  background-color: gold;
+  padding:20px;
+  margin-top:10px;
+  padding:20px;
+  border: 2px solid black;
+  border-radius:5px;
+}
+
+.newmessage.container {
+  background-color: gold;
+  border: 2px solid black;
+  min-width:300px;
+  border-radius:5px;
+  padding:10px;
+}
+
+.newmessage {
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+ul {
+  padding:0;
+  gap:3px;
+}
+
+.error {
+  list-style-type: none;
+  border-radius: 5px;
+  padding:2px;
+  background-color: red;
+  margin-top:2px;;
+}
+
+.message {
+  background-color:rgb(185, 185, 185);
+  margin: 5px;
+  border-radius: 5px;
+  border: 2px solid rgb(248, 248, 248);
+  padding:5px;
+  min-width:350px;
+  padding:20px;
+}
+
+.maincontent {
+  background-color: gold;
+  border-radius: 5px;
+  padding:10px;
+}
+
+.info {
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.sender {
+  max-width: 170px;
+}
+
+.signup-form {
+  margin-top:20px;
+  background-color: rgb(167, 162, 162);
+  border-radius:5px;
+  border:2px solid black;
+  padding:20px;
+  gap:5px;
+}
+
+.signup-form > .formitem {
+  display:flex;
+  justify-content: space-between;
+}
+
+.signup-form > .button {
+  float:right;
 }
