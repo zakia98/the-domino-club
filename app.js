@@ -9,6 +9,7 @@ var logger = require('morgan');
 let mongoose = require('mongoose');
 let bcrypt = require('bcryptjs');
 let compression = require('compression')
+let helmet = require('helmet')
 require('dotenv').config()
 global.decode = require('./helpers').decode
 let mongoDB = process.env.DB_URL
