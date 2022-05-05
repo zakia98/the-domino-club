@@ -7,7 +7,8 @@ const LocalStrategy = require('passport-local').Strategy;
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 let mongoose = require('mongoose');
-let bcrypt = require('bcryptjs')
+let bcrypt = require('bcryptjs');
+let compression = require('compression')
 require('dotenv').config()
 global.decode = require('./helpers').decode
 let mongoDB = process.env.DB_URL
@@ -63,7 +64,8 @@ passport.deserializeUser(function(id, done) {
   })
 })
 
-
+app.use(compression())
+app.use(helmet())
 app.use(session({secret:'cats', resave:false, saveUninitialized:true}));
 app.use(passport.initialize());
 app.use(passport.session());
