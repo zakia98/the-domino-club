@@ -9,6 +9,7 @@ A Node.js project which utilises passportJS to deliver an experience of an exclu
 
 ![Demo image1](./screenshots/screenshot1.png)
 
+Form validation:
 ![Demo image2](./screenshots/screenshot2.png)
 
 ![Demo image3](./screenshots/screenshot3.png)
