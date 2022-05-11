@@ -47,6 +47,10 @@ block content
         if user
           if user.member_status 
             p.sender #{message.user}
+          else 
+            p.sender You need to log in and be a
+              a(href='/jointheclub')  member  
+              | to see who posted!
         else 
           p.sender You need to log in and be a
             a(href='/jointheclub')  member  
